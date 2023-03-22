@@ -1,10 +1,15 @@
 # Bayesian Team Imitation Learner
+
 This is the official implementation of BTIL proposed in [Semi-Supervised Imitation Learning of Team Policies from Suboptimal Demonstrations](https://arxiv.org/abs/2205.02959), IJCAI 2022.
 
 ## Installation
 
-We recommend you use `conda` environment. You can set up the virtual environment with following command:
-`conda env create -f env.yml `
+Clone this repository to your local PC and install it using the following commands:
+
+```
+cd BTIL/
+pip install -e .
+```
 
 ## Usage
 
@@ -25,6 +30,7 @@ You can access the trained policies and mental state dynamics as follows:
 btil.list_np_policy  # policy output
 btil.list_Tx  # mental state dynamics output
 ```
+
 ## Citation
 
 ```

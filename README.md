@@ -1,6 +1,6 @@
 # Bayesian Team Imitation Learner
 
-This is the official implementation of BTIL proposed in [Semi-Supervised Imitation Learning of Team Policies from Suboptimal Demonstrations](https://arxiv.org/abs/2205.02959), IJCAI 2022.
+This is an implementation of BTIL proposed in [Semi-Supervised Imitation Learning of Team Policies from Suboptimal Demonstrations](https://arxiv.org/abs/2205.02959), IJCAI 2022.
 
 ## Installation
 

@@ -32,16 +32,16 @@ btil.list_Tx  # mental state dynamics output
 ```
 
 ## Citation
-
 ```
 @inproceedings{seo2022semi,
   title     = {Semi-Supervised Imitation Learning of Team Policies from Suboptimal Demonstrations},
   author    = {Seo, Sangwon and Unhelkar, Vaibhav V.},
   booktitle = {Proceedings of the Thirty-First International Joint Conference on
                Artificial Intelligence, {IJCAI-22}},
+  publisher = {International Joint Conferences on Artificial Intelligence Organization},
   pages     = {2492--2500},
   year      = {2022},
   month     = {7},
-  url       = {https://doi.org/10.24963/ijcai.2022/346},
+  url       = {https://doi.org/10.24963/ijcai.2022/346}
 }
 ```

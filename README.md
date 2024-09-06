@@ -16,7 +16,7 @@ pip install -e .
 Please import `BTIL_SVI` to use BTIL.
 
 ```
-from BTIL.btil_svi import BTIL_SVI
+from BTIL.algs.btil_svi import BTIL_SVI
 ```
 
 You can create a script that trains BTIL as follows:

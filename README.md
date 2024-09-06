@@ -13,25 +13,30 @@ pip install -e .
 
 ## Usage
 
-Please import `BTIL_Decen` in the file `BTIL/algs/btil_decentral.py` to use BTIL.
-
-You can train btil using methods in the following order:
+Please import `BTIL_SVI` to use BTIL.
 
 ```
-btil = BTIL_Decen(...)
-btil.set_dirichlet_prior(...)
-btil.set_bx_and_Tx(...)  # optional
+from BTIL.btil_svi import BTIL_SVI
+```
+
+You can create a script that trains btil as follows:
+
+```
+btil = BTIL_SVI(...)
+btil.set_prior(...)
+btil.initialize_param()
 btil.do_inference()
 ```
 
 You can access the trained policies and mental state dynamics as follows:
 
 ```
-btil.list_np_policy  # policy output
-btil.list_Tx  # mental state dynamics output
+btil.list_np_policy[i]  # learned policy for agent i
+btil.list_Tx[i].np_Tx  # learned mental state dynamics for agent i
 ```
 
 ## Citation
+
 ```
 @inproceedings{seo2022semi,
   title     = {Semi-Supervised Imitation Learning of Team Policies from Suboptimal Demonstrations},

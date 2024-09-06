@@ -9,22 +9,35 @@ T_SAXSeqence = Sequence[Tuple[int, Tuple[int, int], Tuple[int, int]]]
 
 
 class BTIL_SVI:
+
   def __init__(
       self,
       trajectories: Sequence[T_SAXSeqence],
       num_states: int,
       tuple_num_latents: Tuple[int, ...],
       tuple_num_actions: Tuple[int, ...],
-      trans_x_dependency=(True, True, True, True, False),  # s, a1, a2, a3, sn
+      trans_x_dependency=(True, True, True, False),  # s, a1, ..., ak, s'
       max_iteration: int = 1000,
       epsilon: float = 0.001,
       lr: float = 0.1,
       lr_beta: float = 0.001,
       decay: float = 0.01,
-      no_gem: bool = False) -> None:
+      no_gem: bool = True) -> None:
     '''
       trajectories: list of list of (state, joint action)-tuples
-      tuple_num_latents: truncated stick-breaking number + 1
+      tuple_num_latents: number of possible latents
+                        (or, for DP, truncated stick-breaking number + 1)
+      trans_x_dependency: a tuple of booleans, each representing whether the
+          latent transition function (Tx) depends on a specific variable. For
+          example, in a two-agent task where Tx takes s,a1,a2 as its inputs
+          (i.e., Tx(x'|s,a1,a2,x)), the tuple would be (True,True,True,False).
+      epsilon: tolerance for the convergence criterion
+      lr: learning rate for the pi and Tx parameters
+      lr_beta: learning rate for the beta (needed only when no_gem=False)
+      decay: decay rate for the learning rate
+      no_gem: if False, GEM prior is used (default: True).
+              (As in the case of our paper where you know the number of latents, 
+              you don't need to use GEM.)
     '''
 
     assert len(tuple_num_actions) + 2 == len(trans_x_dependency)
@@ -273,10 +286,10 @@ class BTIL_SVI:
         tp = t - 1
         state_p, joint_a_p, _ = traj[tp]
         state, joint_a, _ = traj[t]
-        tx_index = (slice(None), *joint_a_p, state, slice(None))
         for idx_a in range(self.num_agents):
           q_xx = list_q_xx[idx_a]
           q_x = list_q_x[idx_a]
+          tx_index = self.list_Tx[idx_a].get_index(state_p, joint_a_p, state)
           list_param_tx_hat[idx_a][tx_index] += q_xx[tp]
           list_param_pi_hat[idx_a][:, state, joint_a[idx_a]] += q_x[t]
 
